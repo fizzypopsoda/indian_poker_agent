@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFR Poker Agent</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CFR Poker Agent</h1>
+        <button id="runButton">Run Poker Agent</button>
+        <h3>Output:</h3>
+        <textarea id="output" readonly></textarea>
+        <h3>Error:</h3>
+        <textarea id="error" readonly></textarea>
+    </div>
+
+    <script>
+        document.getElementById('runButton').addEventListener('click', function() {
+            fetch('/run', {
+                method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').textContent = data.output;
+                document.getElementById('error').textContent = data.error;
+            });
+        });
+    </script>
+</body>
+</html>
